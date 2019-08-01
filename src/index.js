@@ -30,7 +30,7 @@ const LinksField = ({data}) => {
     if (!data) {
         return null;
     }
-    if (typeof data === 'string'){
+    if (typeof data === 'string' || typeof data === 'number' || typeof data === 'boolean'){
         return <p>{data}</p>
     }
     let propertyKeys = [];
