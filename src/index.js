@@ -7,13 +7,11 @@ function NavigationApp() {
     const [url, setURL] = useState('https://play-with-fint.felleskomponent.no/utdanning/elev/person/fodselsnummer/14029923273');
     const [json, setJson] = useState('');
 
-    useEffect(()=> {
-        console.log("test");
-        console.log(url);
+    useEffect(() => {
+        console.log("useEffect Triggered")
         fetch(url)
             .then(res => res.json())
-            .then(
-                (result) => {
+            .then((result) => {
                     setJson(result);
                 }
             )
@@ -49,26 +47,25 @@ function NavigationApp() {
             )}
             </div>);
         } else {
-            if (typeof data === 'string' && validURL(data)){
-                return <button onClick={()=> setURL(data)}>{data}</button>
+            if (typeof data === 'string' && validURL(data)) {
+                return <button onClick={() => setURL(data)}>{data}</button>
             }
             return <p><b>{data}</b></p>;
         }
     };
 
-        return (
-            <div>
-                <Header/>
-                <DataField data={json}></DataField>
-            </div>
-        );
+    return (
+        <div>
+            <Header/>
+            <DataField data={json}></DataField>
+        </div>
+    );
 }
-
 
 
 function Header() {
     return (
-        <div className={Header}>
+        <div>
             <h1>Velkommen til play-with-fint navigasjon</h1>
         </div>
     );
@@ -82,11 +79,11 @@ ReactDOM.render(<NavigationApp/>, document.getElementById('root'));
 serviceWorker.unregister();
 
 function validURL(str) {
-    const pattern = new RegExp('^(https?:\\/\\/)?'+
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
-        '((\\d{1,3}\\.){3}\\d{1,3}))'+ //
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
-        '(\\?[;&a-z\\d%_.~+=-]*)?'+
-        '(\\#[-a-z\\d_]*)?$','i');
+    const pattern = new RegExp('^(https?:\\/\\/)?' +
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + //
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+        '(\\?[;&a-z\\d%_.~+=-]*)?' +
+        '(\\#[-a-z\\d_]*)?$', 'i');
     return !!pattern.test(str);
 }
