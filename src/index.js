@@ -8,6 +8,8 @@ function NavigationApp() {
     const [json, setJson] = useState('');
 
     useEffect(()=> {
+        console.log("test");
+        console.log(url);
         fetch(url)
             .then(res => res.json())
             .then(
@@ -48,7 +50,7 @@ function NavigationApp() {
             </div>);
         } else {
             if (typeof data === 'string' && validURL(data)){
-                return <button onClick={()=> setURL(data)}>TEST</button>
+                return <button onClick={()=> setURL(data)}>{data}</button>
             }
             return <p><b>{data}</b></p>;
         }
